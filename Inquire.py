@@ -225,7 +225,7 @@ if __name__ == "__main__":
                 exit()
     try:
         dep = Deployer(qa)
-        progress_bar = tqdm(dep.deploy(), desc='Deploying...', total=100)
+        progress_bar = tqdm(dep.deploy(), desc='Deploying...', total=13)
         for proc in progress_bar:
             progress_bar.set_description(proc)
             progress_bar.update()
