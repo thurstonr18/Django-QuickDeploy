@@ -96,7 +96,6 @@ class Deployer:
             query = output
         else:
             query = error
-
         return query
     def create_venv(self):
         # Command to create a virtual environment
@@ -120,14 +119,14 @@ class Deployer:
         cmd = [
             self.psql_path,
             '-U' 'postgres',
-            '-c', f"CREATE DATABASE {self.project_name};"
+            '-c', f"CREATE DATABASE {self.project_name.lower()};"
         ]
         p = pop(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
         out, err = p.communicate()
         output = out.decode('utf8')
         if p.returncode != 0:
             raise SubprocessErrorDetected(message=err.decode('utf8'))
-        self.DATABASES['default']['NAME'] = self.project_name
+        self.DATABASES['default']['NAME'] = self.project_name.lower()
         self.DATABASES['default']['PASSWORD'] = self.password
 
         return True
@@ -142,19 +141,19 @@ class Deployer:
         re1 = re.sub(r'ALLOWED_HOSTS = \[\]', r"ALLOWED_HOSTS = ['*']\nLOGIN_REDIRECT_URL = '/'", re0)
         if "Dramatiq" in self.features and "Simple History" in self.features:
             re2 = re.sub(r"\'django\.contrib\.staticfiles\',",
-                         r"'django.contrib.staticfiles',\n    'django_dramatiq'\n    'simple_history'\n    'main'\n,",
+                         r"'django.contrib.staticfiles',\n    'django_dramatiq',\n    'simple_history',\n    'main'\n",
                          re1)
         elif "Dramatiq" in self.features:
             re2 = re.sub(r"\'django\.contrib\.staticfiles\',",
-                         r"'django.contrib.staticfiles',\n    'django_dramatiq'\n    'main'\n,",
+                         r"'django.contrib.staticfiles',\n    'django_dramatiq',\n    'main'\n",
                          re1)
         elif "Simple History" in self.features:
             re2 = re.sub(r"\'django\.contrib\.staticfiles\',",
-                         r"'django.contrib.staticfiles',\n    'simple_history'\n    'main'\n,",
+                         r"'django.contrib.staticfiles',\n    'simple_history',\n    'main'\n",
                          re1)
         else:
             re2 = re.sub(r"\'django\.contrib\.staticfiles\',",
-                         r"'django.contrib.staticfiles',\n    'main'\n,",
+                         r"'django.contrib.staticfiles',\n    'main'\n",
                          re1)
 
         re3 = re.search(r'(DATABASES = \{.*}\n\n)', re2, re.DOTALL)
@@ -192,9 +191,10 @@ class Deployer:
         media_dest = os.path.join(self.django_path, 'media', 'ribbon.png')
 
         # Ensure the target directories exist
-        os.makedirs(os.path.dirname(main_urls_dest), exist_ok=True)
-        os.makedirs(os.path.dirname(project_urls_dest), exist_ok=True)
+        #os.makedirs(os.path.dirname(main_urls_dest), exist_ok=True)
+        #os.makedirs(os.path.dirname(project_urls_dest), exist_ok=True)
         os.makedirs(os.path.dirname(media_dest), exist_ok=True)
+
 
         # Copy urls.py
         shutil.copy(urls_file, main_urls_dest)
@@ -236,7 +236,7 @@ class Deployer:
 
         # Create the project directory
         yield "Make dir"
-        os.mkdir(self.django_path)
+        os.mkdir(self.project_path)
         time.sleep(1)
 
         # Set up the database
@@ -277,6 +277,8 @@ class Deployer:
         if "Dramatiq" in self.features:
             yield "Install Dramatiq"
             cmd = f"{activate_cmd}; python -m pip install django-dramatiq[rabbitmq]"
+            self.process(cmd, 'Powershell', wdir=self.django_path)
+            cmd = f"{activate_cmd}; python -m pip install pika"
             self.process(cmd, 'Powershell', wdir=self.django_path)
             time.sleep(1)
         else:

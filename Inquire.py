@@ -82,7 +82,7 @@ class Questionnaire:
             """
         self.responses = {}
         print(intro_message)
-        time.sleep(2)
+        time.sleep(0.3)
 
     def is_database(self, name=None, pwd=None, sqlpath=None):
         env = os.environ.copy()
@@ -195,7 +195,6 @@ class Questionnaire:
                         raise RabbitMQNotInstalledError()
                 return self.responses
             except Exception as e:
-                print(e)
                 return 'HELP'
 
 if __name__ == "__main__":
