@@ -33,4 +33,11 @@ python Inquire.py
 ```
 
 ## Compile your own
-If you'd like to compile your own <b>.exe</b>, I used <a href="https://github.com/pyinstaller/pyinstaller">PyInstaller</a>
+If you'd like to compile your own <b>.exe</b>, I used <a href="https://github.com/pyinstaller/pyinstaller">PyInstaller</a>.
+
+## Acknowledgments
+
+This project uses the following third-party libraries:
+
+- **<a href="https://github.com/CITGuru/PyInquirer">PyInquirer</a>**: A Python module for common interactive command line user interfaces.
+- **<a href="https://github.com/tqdm/tqdm">TQDM</a>**: A Fast, Extensible Progress Bar for Python and CLI.
