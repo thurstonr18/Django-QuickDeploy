@@ -226,23 +226,18 @@ class Deployer:
 
     def deploy(self):
         self.django_path = os.path.join(self.project_path, self.project_name)
-
-        # Create the project directory
         yield "Make dir"
         os.mkdir(self.project_path)
         time.sleep(1)
 
-        # Set up the database
         yield "Creating DB..."
         self.setup_db()
         time.sleep(1)
 
-        # Create the virtual environment
         yield "Creating venv"
         self.create_venv()
         time.sleep(1)
 
-        # Activate the virtual environment
         activate_script = self.activate_venv()
         activate_cmd = f"& {activate_script}"
 
@@ -256,7 +251,6 @@ class Deployer:
         self.process(cmd, 'Powershell', wdir=self.project_path)
         time.sleep(1)
 
-        # Run the Django commands within the virtual environment
         yield "Run startproject"
         cmd = f"{activate_cmd}; python -m django startproject {self.project_name}"
         self.process(cmd, 'Powershell', wdir=self.project_path)

@@ -226,7 +226,8 @@ if __name__ == "__main__":
         for proc in progress_bar:
             progress_bar.set_description(proc)
             progress_bar.update()
-        print('Done')
+        print('Done - Closing...')
+        time.sleep(3)
     except Exception as e:
         print(f"An error occurred while deploying the project, please see below.\n\n{str(e)}")
         exit()
