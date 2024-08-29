@@ -3,14 +3,14 @@
 
 a = Analysis(
     ['Inquire.py'],
-    pathex=['F:\\Django-Deployer\\pythonProject'],
+    pathex=[r'Z:\Django-Deployer\pythonProject'],
     binaries=[],
     datas=[
         ('baseurls.py', '.'),
         ('Deploy.py', '.'),
         ('models.py', '.'),
-        ('ribbon.png', '.'),
-        ('rr.ico', '.'),
+        #('ribbon.png', '.'),
+        #('rr.ico', '.'),
         ('static.zip', '.'),
         ('tasks.py', '.'),
         ('templates.zip', '.'),
@@ -41,8 +41,8 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=True,
-    uac_admin=True,
-    icon='rr.ico',
+    uac_admin=False,
+    #icon='rr.ico',
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
