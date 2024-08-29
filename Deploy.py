@@ -2,7 +2,6 @@
 import os, sys, re
 import subprocess
 import zipfile
-from random import random
 from subprocess import Popen as pop
 import shutil
 import time
@@ -224,12 +223,6 @@ class Deployer:
             shutil.copy(tasks_file, os.path.join(main_dest, "tasks.py"))
 
         return
-
-
-    def pee_pee(self):
-        for i in range(100):
-            yield "pee pee {}".format(str(i))
-            time.sleep(0.05)
 
     def deploy(self):
         self.django_path = os.path.join(self.project_path, self.project_name)

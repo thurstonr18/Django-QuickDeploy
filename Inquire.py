@@ -1,8 +1,6 @@
 import os
-import sys
 import re
 import time
-import json
 import subprocess
 from subprocess import Popen as pop
 from PyInquirer import prompt
