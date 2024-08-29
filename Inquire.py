@@ -60,11 +60,6 @@ class Questionnaire:
                 ]
             },
             {
-                'type': 'input',
-                'name': 'username',
-                'message': ''
-            },
-            {
                 'type': 'password',
                 'name': 'password',
                 'message': 'Enter the PostgreSQL password for user postgres.'
