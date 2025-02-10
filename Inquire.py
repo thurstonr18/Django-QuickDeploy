@@ -1,4 +1,4 @@
-import os
+import os, sys
 import re
 import time
 import subprocess
@@ -230,4 +230,4 @@ if __name__ == "__main__":
         time.sleep(3)
     except Exception as e:
         print(f"An error occurred while deploying the project, please see below.\n\n{str(e)}")
-        exit()
+        input("Press any key to quit")

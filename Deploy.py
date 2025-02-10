@@ -7,7 +7,7 @@ import shutil
 import time
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
-rrico = os.path.join(bundle_dir, 'rr.ico')
+
 model_file = os.path.join(bundle_dir, 'models.py')
 view_file = os.path.join(bundle_dir, 'views.py')
 urls_file = os.path.join(bundle_dir, 'urls.py')
@@ -15,7 +15,7 @@ tasks_file = os.path.join(bundle_dir, 'tasks.py')
 settingsurls_file = os.path.join(bundle_dir, 'baseurls.py')
 static_files = os.path.join(bundle_dir, 'static.zip')
 template_files = os.path.join(bundle_dir, 'templates.zip')
-avit_logo = os.path.join(bundle_dir, 'ribbon.png')
+
 
 time_settings = '''
 LANGUAGE_CODE = 'en-us'
@@ -207,8 +207,8 @@ class Deployer:
         # Copy and rename baseurls.py to urls.py
         shutil.copy(settingsurls_file, project_urls_dest)
 
-        # Copy logo over to media/
-        shutil.copy(avit_logo, media_dest)
+
+
 
         # Unzip static.zip into both self.django_path and self.django_path/main
         with zipfile.ZipFile(static_files) as zip_ref:
