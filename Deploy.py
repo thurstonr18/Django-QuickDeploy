@@ -186,13 +186,6 @@ class Deployer:
         # Path to copy baseurls.py into, renaming it to urls.py
         project_urls_dest = os.path.join(self.django_path, f"{self.project_name}", "urls.py")
 
-        # Set media destination (for AVIT logo)
-        media_dest = os.path.join(self.django_path, 'media', 'ribbon.png')
-
-        # Ensure the target directories exist
-        #os.makedirs(os.path.dirname(main_urls_dest), exist_ok=True)
-        #os.makedirs(os.path.dirname(project_urls_dest), exist_ok=True)
-        os.makedirs(os.path.dirname(media_dest), exist_ok=True)
 
 
         # Copy urls.py
