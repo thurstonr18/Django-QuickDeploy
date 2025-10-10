@@ -3,7 +3,7 @@ import re
 import time
 import subprocess
 from subprocess import Popen as pop
-from PyInquirer import prompt
+from InquirerPy import prompt
 from Deploy import Deployer
 from tqdm import tqdm
 
